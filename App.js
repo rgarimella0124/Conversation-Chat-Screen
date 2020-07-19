@@ -23,7 +23,7 @@ export default class Converstaions extends Component {
   }
 
   //fun keyboard stuff- we use these to get the end of the ScrollView to "follow" the top of the InputBar as the keyboard rises and falls
-  componentWillMount = async () => {
+  UNSAFE_componentWillMount = async () => {
     this.keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       this.keyboardDidShow.bind(this)
@@ -35,7 +35,7 @@ export default class Converstaions extends Component {
     await this.handleDatafetch();
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }
@@ -96,7 +96,7 @@ export default class Converstaions extends Component {
   }
 
   //scroll to bottom when first showing the view
-  componentDidMount = () => {
+  UNSAFE_componentDidMount = () => {
     setTimeout(
       function() {
         this.scrollView.scrollToEnd();
@@ -106,7 +106,7 @@ export default class Converstaions extends Component {
 
   //this is a bit sloppy: this is to make sure it scrolls to the bottom when a message is added, but
   //the component could update for other reasons, for which we wouldn't want it to scroll to the bottom.
-  componentDidUpdate() {
+  UNSAFE_componentDidUpdate() {
     setTimeout(
       function() {
         this.scrollView.scrollToEnd();
@@ -217,7 +217,7 @@ class InputBar extends Component {
   //Another possible solution here would be if InputBar kept the text as state and only reported it when the Send button
   //was pressed. Then, resetInputText() could be called when the Send button is pressed. However, this limits the ability
   //of the InputBar's text to be set from the outside.
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.text === "") {
       this.autogrowInput.resetInputText();
     }
